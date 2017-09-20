@@ -81,10 +81,10 @@ void setup() {
   // Inisialisation communication serie
   Serial.begin(9600);
 
-  /*escFrontLeft.attach(ESC_FRONT_LEFT_PIN);
+  escFrontLeft.attach(ESC_FRONT_LEFT_PIN);
   escFrontRight.attach(ESC_FRONT_RIGHT_PIN);
   escBackLeft.attach(ESC_BACK_LEFT_PIN);
-  escBackRight.attach(ESC_BACK_RIGHT_PIN);*/
+  escBackRight.attach(ESC_BACK_RIGHT_PIN);
 
   FrontLeftMotorCalibrageIndice = 990;
   FrontRightMotorCalibrageIndice = 990;
@@ -413,7 +413,7 @@ int setMotorsValues() {
     setBackRightMotorValues(BackRightMotorCalibrageIndice - 10);
 
     // DEBUG !!
-    Serial.print(":");
+    /*Serial.print(":");
     Serial.print(FrontLeftMotorCalibrageIndice);
     Serial.print("|");
     Serial.print(FrontRightMotorCalibrageIndice);
@@ -421,7 +421,7 @@ int setMotorsValues() {
     Serial.print(BackLeftMotorCalibrageIndice);
     Serial.print("|");
     Serial.print(BackRightMotorCalibrageIndice);
-    Serial.print(";");
+    Serial.print(";");*/
   }
 }
 
@@ -431,7 +431,7 @@ int setMotorsValues() {
 int setFrontLeftMotorValues(int value) {
   if (value != NextFrontLeftMotorValue) {
 
-    //escFrontLeft.writeMicroseconds(value);
+    escFrontLeft.writeMicroseconds(value);
 
     NextFrontLeftMotorValue = value;
   }
@@ -443,7 +443,7 @@ int setFrontLeftMotorValues(int value) {
 int setFrontRightMotorValues(int value) {
   if (value != NextFrontRightMotoValue) {
 
-    //escFrontRight.writeMicroseconds(value);
+    escFrontRight.writeMicroseconds(value);
 
     NextFrontRightMotoValue = value;
   }
@@ -455,7 +455,7 @@ int setFrontRightMotorValues(int value) {
 int setBackLeftMotorValues(int value) {
   if (value != NextBackLeftMotorValue) {
 
-    //escBackLeft.writeMicroseconds(value);
+    escBackLeft.writeMicroseconds(value);
 
     NextBackLeftMotorValue = value;
   }
@@ -467,7 +467,7 @@ int setBackLeftMotorValues(int value) {
 int setBackRightMotorValues(int value) {
   if (value != NextBackRightMotoValue) {
 
-    //escBackRight.writeMicroseconds(value);
+    escBackRight.writeMicroseconds(value);
 
     NextBackRightMotoValue = value;
   }
