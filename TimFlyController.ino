@@ -8,6 +8,7 @@
 */
 #include <Servo.h>
 
+const int TEST_MODE = 0;      // Permet de désactiver la gestion des pin pour tester le programme
 //const int INITIALISATIONLEDPIN = 13;      // Pin de la led pour voir si il y a eu initialisation
 const int ACCELERMETER_X_PIN = 17;//0;         // Pin de l'axe X de l'accéléromètre - 0
 const int ACCELERMETER_Y_PIN = 18;//1;         // Pin de l'axe Y de l'accéléromètre - 1
@@ -81,10 +82,12 @@ void setup() {
   // Inisialisation communication serie
   Serial.begin(9600);
 
-  escFrontLeft.attach(ESC_FRONT_LEFT_PIN);
-  escFrontRight.attach(ESC_FRONT_RIGHT_PIN);
-  escBackLeft.attach(ESC_BACK_LEFT_PIN);
-  escBackRight.attach(ESC_BACK_RIGHT_PIN);
+  if(TEST_MODE == 0){
+    escFrontLeft.attach(ESC_FRONT_LEFT_PIN);
+    escFrontRight.attach(ESC_FRONT_RIGHT_PIN);
+    escBackLeft.attach(ESC_BACK_LEFT_PIN);
+    escBackRight.attach(ESC_BACK_RIGHT_PIN);
+  }
 
   FrontLeftMotorCalibrageIndice = 990;
   FrontRightMotorCalibrageIndice = 990;
@@ -429,7 +432,7 @@ int setMotorsValues() {
    Applique la valeur en paramètre au moteur avant gauche
 */
 int setFrontLeftMotorValues(int value) {
-  if (value != NextFrontLeftMotorValue) {
+  if (value != NextFrontLeftMotorValue && TEST_MODE == 0) {
 
     escFrontLeft.writeMicroseconds(value);
 
@@ -441,7 +444,7 @@ int setFrontLeftMotorValues(int value) {
    Applique la valeur en paramètre au moteur avant droite
 */
 int setFrontRightMotorValues(int value) {
-  if (value != NextFrontRightMotoValue) {
+  if (value != NextFrontRightMotoValue && TEST_MODE == 0) {
 
     escFrontRight.writeMicroseconds(value);
 
@@ -453,7 +456,7 @@ int setFrontRightMotorValues(int value) {
    Applique la valeur en paramètre au moteur arrière gauche
 */
 int setBackLeftMotorValues(int value) {
-  if (value != NextBackLeftMotorValue) {
+  if (value != NextBackLeftMotorValue && TEST_MODE == 0) {
 
     escBackLeft.writeMicroseconds(value);
 
@@ -465,7 +468,7 @@ int setBackLeftMotorValues(int value) {
    Applique la valeur en paramètre au moteur arrière droite
 */
 int setBackRightMotorValues(int value) {
-  if (value != NextBackRightMotoValue) {
+  if (value != NextBackRightMotoValue && TEST_MODE == 0) {
 
     escBackRight.writeMicroseconds(value);
 
@@ -480,7 +483,10 @@ int setBackRightMotorValues(int value) {
 */
 int LastXAxeValue = 0; //Permet d'ignorer les changement de seulement +-1. Réduit effet vibration
 int getXAxe(int withCalibration) {
-  int x = 0;//analogRead(ACCELERMETER_X_PIN);
+  int x = 0;
+  if(TEST_MODE == 0){
+    x = analogRead(ACCELERMETER_X_PIN);
+  }
   if (withCalibration == 1) {
     x = x - XCalibrage;
     if (x + 1 == LastXAxeValue || x - 1 == LastXAxeValue) {
@@ -497,7 +503,10 @@ int getXAxe(int withCalibration) {
 */
 int LastYAxeValue = 0; //Permet d'ignorer les changement de seulement +-1. Réduit effet vibration
 int getYAxe(int withCalibration) {
-  int y = 0;//analogRead(ACCELERMETER_Y_PIN);
+  int y = 0;
+  if(TEST_MODE == 0){
+    y = analogRead(ACCELERMETER_Y_PIN);
+  }
   if (withCalibration == 1) {
     y = y - YCalibrage;
     if (y + 1 == LastYAxeValue || y - 1 == LastYAxeValue) {
