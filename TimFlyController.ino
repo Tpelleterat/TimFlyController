@@ -4,7 +4,6 @@
    Serial communications :
    Input :
     -> "i" : Initialisation. A envoyer au premier démarrage pour s'assurer que la communication est bien établie.
-    -> "t" : Décollage. A envoyer en deuxième pour indiquer que l'on souhaite décoller
 */
 #include <Servo.h>
 
