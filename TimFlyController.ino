@@ -7,7 +7,7 @@
 */
 #include <Servo.h>
 
-const int TEST_MODE = 0;      // Permet de désactiver la gestion des pin pour tester le programme
+const int TEST_MODE = 2;      // Permet de désactiver la gestion des pin pour tester le programme. "1" tous les pin sont désactivés, "2" tous sauf acceleromètre
 //const int INITIALISATIONLEDPIN = 13;      // Pin de la led pour voir si il y a eu initialisation
 const int ACCELERMETER_X_PIN = 17;//0;         // Pin de l'axe X de l'accéléromètre - 0
 const int ACCELERMETER_Y_PIN = 18;//1;         // Pin de l'axe Y de l'accéléromètre - 1
@@ -483,7 +483,7 @@ int setBackRightMotorValues(int value) {
 int LastXAxeValue = 0; //Permet d'ignorer les changement de seulement +-1. Réduit effet vibration
 int getXAxe(int withCalibration) {
   int x = 0;
-  if(TEST_MODE == 0){
+  if(TEST_MODE == 0 || TEST_MODE == 2){
     x = analogRead(ACCELERMETER_X_PIN);
   }
   if (withCalibration == 1) {
@@ -503,7 +503,7 @@ int getXAxe(int withCalibration) {
 int LastYAxeValue = 0; //Permet d'ignorer les changement de seulement +-1. Réduit effet vibration
 int getYAxe(int withCalibration) {
   int y = 0;
-  if(TEST_MODE == 0){
+  if(TEST_MODE == 0 || TEST_MODE == 2){
     y = analogRead(ACCELERMETER_Y_PIN);
   }
   if (withCalibration == 1) {
